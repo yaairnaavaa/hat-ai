@@ -23,13 +23,19 @@ export const dynamic = "force-dynamic";
 const app = new Elysia({ prefix: "/api", aot: false })
   .use(swagger())
   .get("/:token", async ({ params: { token } }) => {
+    console.log("---Token---");
+    console.log(token);
     const tokenMatch = searchToken(token)[0];
+    console.log("---tokenMatch---");
+    console.log(tokenMatch)
     if (!tokenMatch) {
       return {
         error: `Token ${token} not found`,
       };
     }
     const tokenMetadata = await ftGetTokenMetadata(tokenMatch.id);
+    console.log("---tokenMetadata---");
+    console.log(tokenMetadata)
     if (!tokenMetadata) {
       return {
         error: `Metadata for token ${token} not found`,
