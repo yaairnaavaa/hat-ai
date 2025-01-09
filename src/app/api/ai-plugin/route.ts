@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import { DEPLOYMENT_URL } from "vercel-url";
 
 const key = JSON.parse(process.env.BITTE_KEY || "{}");
 const config = JSON.parse(process.env.BITTE_CONFIG || "{}");
@@ -23,7 +22,7 @@ export async function GET() {
     },
     servers: [
       {
-        url: config?.url || DEPLOYMENT_URL,
+        url: config?.url || process.env.AMPLIFY_DEPLOYMENT_URL
       },
     ],
     "x-mb": {
